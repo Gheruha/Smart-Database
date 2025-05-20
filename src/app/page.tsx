@@ -1,3 +1,4 @@
+import Footer from "@/components/footer/footer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -19,6 +20,9 @@ export default function Home() {
           </Button>
         </div>
       </main>
+      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+        <Footer />
+      </footer>
     </div>
   );
 }
