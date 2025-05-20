@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ThemeToggle } from "../theme/theme.toggler";
 import { DatabaseZap } from "lucide-react";
+import { Button } from "../ui/button";
 
 export function Header() {
   return (
@@ -12,7 +13,13 @@ export function Header() {
           <DatabaseZap />
         </Link>
       </div>
-      <div>
+      <div className="flex space-x-2">
+        <Button variant={"outline"}>
+          <Link href={"/auth?mode=signIn"}>Sign In</Link>
+        </Button>
+        <Button>
+          <Link href={"/auth?mode=signUp"}>Sign Up</Link>
+        </Button>
         <ThemeToggle />
       </div>
     </header>

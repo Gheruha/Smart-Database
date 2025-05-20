@@ -19,6 +19,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "School Manage",
   description: "Database management",
+  icons: {
+    icon: "/icons/favicon.ico",
+    shortcut: "/icons/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -41,7 +45,7 @@ export default function RootLayout({
           <ThemeFavicon />
           {children}
 
-          <footer className="fixed bottom-0 left-0 w-full bg-background dark:bg-background">
+          <footer className="sticky bottom-0 left-0 w-full bg-background dark:bg-background">
             <Footer />
           </footer>
         </ThemeProvider>

@@ -11,10 +11,12 @@ export default function Home() {
           school data.
         </p>
         <div className="flex space-x-2">
-          <Link href="/auth">
-            <Button>Get started</Button>
-          </Link>
-          <Button variant={"outline"}>Read more</Button>
+          <Button>
+            <Link href="/auth?mode=SignUp">Get started</Link>
+          </Button>
+          <Button variant={"outline"}>
+            <Link href="/">Read more</Link>
+          </Button>
         </div>
       </main>
     </div>
