@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 
 export function Header() {
   return (
-    <header className="sticky top-0 w-full flex items-center justify-between px-4 py-2 border-b border-border">
+    <header className="fixed top-0 w-full flex items-center justify-between px-4 py-2 border-b border-border z-50">
       <div>
         <Link href="/">
           <DatabaseZap />

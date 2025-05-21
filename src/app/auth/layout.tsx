@@ -17,11 +17,11 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
 
   return (
     <div className="relative flex min-h-screen items-center">
-      <div className="absolute left-4 top-4">
+      <div className="absolute top-16">
         <Button
           onClick={handleGoBack}
           variant="link"
-          className="flex items-center gap-1"
+          className="flex items-center gap-1 cursor-pointer"
         >
           <ArrowLeft size={15} />
           <p>Back</p>
