@@ -1,9 +1,9 @@
-import { SignUpDto } from "@/types/auth.type";
+import { SignUpDto } from "@/lib/types/auth.type";
 import { Session } from "@supabase/supabase-js";
 import { createSupabaseClientApi } from "../../supabase/client";
-import { mapUserData } from "../../store/user.mapper";
+import { mapUserData } from "../../../../store/user.mapper";
 
-// Ta
+// Takes the authorization code and exchanges it for a session
 export const authWithCode = async (code: string): Promise<void> => {
   const supabase = await createSupabaseClientApi();
   const { error } = await supabase.auth.exchangeCodeForSession(code);
@@ -42,3 +42,9 @@ export const signUpUser = async ({
 
   return data.session;
 };
+
+export function isSignUpDtoValid(body: unknown): body is SignUpDto {
+  if (typeof body !== "object" || body === null) return false;
+  const { email, password } = body as Record<string, unknown>;
+  return typeof email === "string" && typeof password === "string";
+}

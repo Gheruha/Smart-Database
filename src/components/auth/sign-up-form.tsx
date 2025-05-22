@@ -10,17 +10,13 @@ import {
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { signUpHandler } from "@/app/auth/handleFunctions";
 const SignUpForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useSignUpForm();
-
-  const signUpHandler = () => {
-    console.log("Working on it...");
-  };
-
   return (
     <form onSubmit={handleSubmit(signUpHandler)}>
       <Card className="mx-auto max-w-sm">

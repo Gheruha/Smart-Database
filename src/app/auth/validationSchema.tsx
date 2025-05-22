@@ -1,7 +1,7 @@
 "use client";
 import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SignUpDto } from "@/types/auth.type";
+import { SignUpDto } from "@/lib/types/auth.type";
 import { z } from "zod";
 
 // Base schemas

@@ -1,4 +1,4 @@
-import { User } from "@/types/user.type";
+import { User } from "@/lib/types/user.type";
 export interface UserResponse {
   id: string;
   email?: string;
