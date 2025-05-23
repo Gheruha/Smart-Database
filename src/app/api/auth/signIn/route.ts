@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { SignDto } from "@/lib/types/auth.type";
 import { isSignDtoValid, signInUser } from "@/lib/utils/auth/auth.utils";
+import { checkUserExists } from "@/lib/utils/user/user.utils";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
@@ -14,6 +15,15 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     }
 
     const { email, password }: SignDto = body;
+
+    // Check if user exist
+    const doesUserExist = await checkUserExists(email);
+    if (!doesUserExist) {
+      return NextResponse.json(
+        { message: "User does not exist. Please sign up first." },
+        { status: 400 }
+      );
+    }
 
     const userSession = await signInUser({ email, password });
     return NextResponse.json({

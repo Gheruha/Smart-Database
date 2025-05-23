@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { signUpUser } from "@/lib/utils/auth/auth.utils";
 import { SignDto } from "@/lib/types/auth.type";
 import { isSignDtoValid } from "@/lib/utils/auth/auth.utils";
+import { checkUserExists } from "@/lib/utils/user/user.utils";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
@@ -17,7 +18,14 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     const { email, password }: SignDto = body;
 
-    // I also need to check if user exists.
+    // Check if user already exist
+    const doesUserExist = await checkUserExists(email);
+    if (doesUserExist) {
+      return NextResponse.json(
+        { message: "Already signed up, you must sign in." },
+        { status: 400 }
+      );
+    }
 
     // Sign up the user
     const userSession = await signUpUser({
