@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 import { useSearchParams } from "next/navigation";
-import SignInForm from "@/components/auth/sign-in-form";
-import SignUpForm from "@/components/auth/sign-up-form";
+import SignForm from "@/components/auth/sign-form";
 
 const AuthPage = () => {
   const searchParams = useSearchParams();
@@ -12,12 +11,8 @@ const AuthPage = () => {
       ? authModeParam
       : "signin";
 
-  const authForms = {
-    signup: <SignUpForm />,
-    signin: <SignInForm />,
-  } as const;
-
-  return <div>{authForms[authMode]}</div>;
+  console.log(authMode)
+  return <SignForm mode={authMode} />;
 };
 
 export default AuthPage;

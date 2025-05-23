@@ -1,5 +1,6 @@
+"use client";
 import React from "react";
-import { useSignUpForm } from "@/app/auth/validationSchema";
+import { useSignForm } from "@/app/auth/validationSchema";
 import {
   Card,
   CardContent,
@@ -10,21 +11,39 @@ import {
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { signUpHandler } from "@/app/auth/handleFunctions";
-const SignUpForm = () => {
+import { signUpHandler, signInHandler } from "@/app/auth/handleFunctions";
+import Link from "next/link";
+export type AuthMode = "signup" | "signin";
+
+interface SignFormProps {
+  mode: AuthMode;
+}
+
+export default function SignForm({ mode }: SignFormProps) {
+  const isSignUp = mode === "signup";
+  const title = isSignUp ? "Sign Up" : "Sign In";
+  const description = isSignUp
+    ? "Complete all the fields to create an account."
+    : "Enter your credentials to sign in.";
+  const onSubmit = isSignUp ? signUpHandler : signInHandler;
+  const buttonText = isSignUp ? "Create an account" : "Sign In";
+  const linkMessage = isSignUp
+    ? "Already have an account?"
+    : "Don't have an account yet?";
+  const link = isSignUp ? "/auth?mode=signIn" : "/auth?mode=signUp";
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useSignUpForm();
+  } = useSignForm();
+
   return (
-    <form onSubmit={handleSubmit(signUpHandler)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Card className="mx-auto max-w-sm">
         <CardHeader>
-          <CardTitle className="text-xl">Sign Up</CardTitle>
-          <CardDescription>
-            Complete all the fields to create the account.
-          </CardDescription>
+          <CardTitle className="text-xl">{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
@@ -56,14 +75,17 @@ const SignUpForm = () => {
                 )}
               </div>
               <Button type="submit" className="w-full cursor-pointer">
-                Create an account
+                {buttonText}
               </Button>
+            </div>
+            <div className="mt-4 text-center text-sm">
+              <Link href={link} className="underline">
+                {linkMessage}
+              </Link>
             </div>
           </div>
         </CardContent>
       </Card>
     </form>
   );
-};
-
-export default SignUpForm;
+}

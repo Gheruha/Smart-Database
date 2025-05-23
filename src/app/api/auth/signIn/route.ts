@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { signUpUser } from "@/lib/utils/auth/auth.utils";
 import { SignDto } from "@/lib/types/auth.type";
-import { isSignDtoValid } from "@/lib/utils/auth/auth.utils";
+import { isSignDtoValid, signInUser } from "@/lib/utils/auth/auth.utils";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
-    const url = new URL(req.url);
     const body: unknown = await req.json();
 
     if (!isSignDtoValid(body)) {
@@ -17,22 +15,14 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     const { email, password }: SignDto = body;
 
-    // I also need to check if user exists.
-
-    // Sign up the user
-    const userSession = await signUpUser({
-      email,
-      password,
-      redirectUrl: `${url.origin}/api/auth/callback`,
-    });
-
+    const userSession = await signInUser({ email, password });
     return NextResponse.json({
-      message:
-        "Sign-up successful! Please check your email to verify your account.",
+      message: "Sign in successful!",
       session: userSession,
+      redirect: "/workspace",
     });
   } catch (error: unknown) {
-    console.error("Sign-up error", error);
+    console.error("Sign-in error:", error);
     const errorMessage =
       error instanceof Error ? error.message : "Internal server error";
     return NextResponse.json({ message: errorMessage }, { status: 500 });

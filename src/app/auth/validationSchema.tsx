@@ -1,7 +1,7 @@
 "use client";
 import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SignUpDto } from "@/lib/types/auth.type";
+import { SignDto } from "@/lib/types/auth.type";
 import { z } from "zod";
 
 // Base schemas
@@ -12,15 +12,15 @@ const passwordSchema = z
   .min(8, "Minimum 8 characters, at least one capital letter and one number.");
 
 // Auth schemas
-export const signUpSchema = z.object({
+export const signSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
 });
 
 // Sign up form hook
-export function useSignUpForm(): UseFormReturn<SignUpDto> {
-  return useForm<SignUpDto>({
-    resolver: zodResolver(signUpSchema),
+export function useSignForm(): UseFormReturn<SignDto> {
+  return useForm<SignDto>({
+    resolver: zodResolver(signSchema),
     defaultValues: { email: "", password: "" },
   });
 }

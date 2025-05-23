@@ -1,4 +1,4 @@
-import { SignUpDto } from "@/lib/types/auth.type";
+import { SignDto } from "@/lib/types/auth.type";
 
 type ApiResponse<T = { message: string }> = T;
 
@@ -27,8 +27,16 @@ class AuthService {
   }
 
   // Sends a POST request to sign up a new user
-async signUp(payload: SignUpDto): Promise<ApiResponse> {
+  async signUp(payload: SignDto): Promise<ApiResponse> {
     return this.fetchApi("signUp", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  }
+
+  // Sends a POST request to sign in the user
+  async signIn(payload: SignDto): Promise<ApiResponse> {
+    return this.fetchApi("signIn", {
       method: "POST",
       body: JSON.stringify(payload),
     });

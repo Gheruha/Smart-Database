@@ -1,7 +1,7 @@
-import { SignUpDto } from "@/lib/types/auth.type";
+import { SignDto } from "@/lib/types/auth.type";
 import { Session } from "@supabase/supabase-js";
 import { createSupabaseClientApi } from "../../supabase/client";
-import { mapUserData } from "../../../../store/user.mapper";
+import { mapUserData } from "../../store/user.mapper";
 
 // Takes the authorization code and exchanges it for a session
 export const authWithCode = async (code: string): Promise<void> => {
@@ -19,7 +19,7 @@ export const signUpUser = async ({
   email,
   password,
   redirectUrl,
-}: SignUpDto): Promise<Session | null> => {
+}: SignDto): Promise<Session | null> => {
   const supabase = await createSupabaseClientApi();
 
   const { data, error } = await supabase.auth.signUp({
@@ -43,7 +43,26 @@ export const signUpUser = async ({
   return data.session;
 };
 
-export function isSignUpDtoValid(body: unknown): body is SignUpDto {
+export const signInUser = async ({
+  email,
+  password,
+}: SignDto): Promise<Session> => {
+  const supabase = await createSupabaseClientApi();
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (error) {
+    console.error("Error signing in:", error.message);
+    throw new Error(error.message || "Failed to sign in");
+  }
+  await mapUserData(data.user);
+
+  return data.session;
+};
+
+export function isSignDtoValid(body: unknown): body is SignDto {
   if (typeof body !== "object" || body === null) return false;
   const { email, password } = body as Record<string, unknown>;
   return typeof email === "string" && typeof password === "string";
