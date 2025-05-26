@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ThemeFavicon } from "@/components/theme/theme-favicon";
-import { Header } from "@/components/header/header";
 import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
@@ -25,11 +24,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html>
       <body
@@ -41,7 +40,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
           <ThemeFavicon />
           {children}
           <Toaster />

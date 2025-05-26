@@ -43,6 +43,7 @@ export const signUpUser = async ({
   return data.session;
 };
 
+// Signing the existent users
 export const signInUser = async ({
   email,
   password,
@@ -62,6 +63,18 @@ export const signInUser = async ({
   return data.session;
 };
 
+// Sign out and clear session
+export const signOutUser = async (): Promise<void> => {
+  const supabase = await createSupabaseClientApi();
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    console.error("Error signing out:", error.message);
+    throw new Error(error.message || "Failed to sign out");
+  }
+};
+
+// Checking if the user completed the auth data correctly
 export function isSignDtoValid(body: unknown): body is SignDto {
   if (typeof body !== "object" || body === null) return false;
   const { email, password } = body as Record<string, unknown>;

@@ -41,6 +41,11 @@ class AuthService {
       body: JSON.stringify(payload),
     });
   }
+
+  // Sends a POST request to sign out the user
+  async signOut(): Promise<ApiResponse> {
+    return this.fetchApi("signOut", { method: "POST" });
+  }
 }
 
 export const authService = new AuthService();

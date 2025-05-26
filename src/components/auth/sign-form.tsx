@@ -11,21 +11,22 @@ import {
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { signUpHandler, signInHandler } from "@/app/auth/handleFunctions";
 import Link from "next/link";
+import { SubmitHandler } from "react-hook-form";
+import { SignDto } from "@/lib/types/auth.type";
 export type AuthMode = "signup" | "signin";
 
 interface SignFormProps {
   mode: AuthMode;
+  onSubmit: SubmitHandler<SignDto>;
 }
 
-export default function SignForm({ mode }: SignFormProps) {
+export default function SignForm({ mode, onSubmit }: SignFormProps) {
   const isSignUp = mode === "signup";
   const title = isSignUp ? "Sign Up" : "Sign In";
   const description = isSignUp
     ? "Complete all the fields to create an account."
     : "Enter your credentials to sign in.";
-  const onSubmit = isSignUp ? signUpHandler : signInHandler;
   const buttonText = isSignUp ? "Create an account" : "Sign In";
   const linkMessage = isSignUp
     ? "Already have an account?"
@@ -74,7 +75,7 @@ export default function SignForm({ mode }: SignFormProps) {
                   </p>
                 )}
               </div>
-              <Button type="submit" className="w-full cursor-pointer">
+              <Button type="submit" className="w-full">
                 {buttonText}
               </Button>
             </div>

@@ -4,6 +4,7 @@ import { SubmitHandler } from "react-hook-form";
 import { SignDto } from "@/lib/types/auth.type";
 import { toast } from "sonner";
 import { Check } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const handleError = (error: unknown) => {
   const errorMessage =
@@ -13,34 +14,42 @@ const handleError = (error: unknown) => {
   });
 };
 
-export const signUpHandler: SubmitHandler<SignDto> = async (signUpData) => {
-  try {
-    const { message } = await authService.signUp(signUpData);
-    toast("Sign Up", {
-      description: (
-        <div className="flex items-center">
-          <Check className="mr-2 text-[hsl(var(--foreground))]" />
-          <span>{message}</span>
-        </div>
-      ),
-    });
-  } catch (error: unknown) {
-    handleError(error);
-  }
-};
+export function useAuthHandlers() {
+  const router = useRouter();
 
-export const signInHandler: SubmitHandler<SignDto> = async (SignInData) => {
-  try {
-    const { message } = await authService.signIn(SignInData);
-    toast("Sign In", {
-      description: (
-        <div className="flex items-center">
-          <Check className="mr-2 text-[hsl(var(--foreground))]" />
-          <span>{message}</span>
-        </div>
-      ),
-    });
-  } catch (error: unknown) {
-    handleError(error);
-  }
-};
+  const signUpHandler: SubmitHandler<SignDto> = async (data) => {
+    try {
+      const { message } = await authService.signUp(data);
+      toast("Signed up!", {
+        description: (
+          <div className="flex items-center">
+            <Check className="mr-2 text-[hsl(var(--foreground))]" />
+            <span>{message}</span>
+          </div>
+        ),
+      });
+      setTimeout(() => router.push("/workspace"), 1500);
+    } catch (e) {
+      handleError(e);
+    }
+  };
+
+  const signInHandler: SubmitHandler<SignDto> = async (data) => {
+    try {
+      const { message } = await authService.signIn(data);
+      toast("Signed in!", {
+        description: (
+          <div className="flex items-center">
+            <Check className="mr-2 text-[hsl(var(--foreground))]" />
+            <span>{message}</span>
+          </div>
+        ),
+      });
+      setTimeout(() => router.push("/workspace"), 1500);
+    } catch (e) {
+      handleError(e);
+    }
+  };
+
+  return { signUpHandler, signInHandler };
+}

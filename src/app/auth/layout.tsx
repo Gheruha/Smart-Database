@@ -21,7 +21,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         <Button
           onClick={handleGoBack}
           variant="link"
-          className="flex items-center gap-1 cursor-pointer"
+          className="flex items-center gap-1"
         >
           <ArrowLeft size={15} />
           <p>Back</p>

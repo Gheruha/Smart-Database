@@ -14,7 +14,7 @@ export function Header() {
         </Link>
       </div>
       <div className="flex space-x-2">
-        <Button variant={"outline"}>
+        <Button variant={"outline"} >
           <Link href={"/auth?mode=signIn"}>Sign In</Link>
         </Button>
         <Button>
