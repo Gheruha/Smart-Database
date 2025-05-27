@@ -74,6 +74,25 @@ export const signOutUser = async (): Promise<void> => {
   }
 };
 
+// Sign in the user with Google
+export const signInUserWithOAuth = async (url: URL): Promise<string> => {
+  const supabase = await createSupabaseClientApi();
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${url.origin}/api/auth/callback`,
+    },
+  });
+
+  if (error) {
+    console.error("Error initiating Google sign-in:", error.message);
+    throw new Error(error.message || "Failed to initialing Google sign-in");
+  }
+
+  return data.url;
+};
+
 // Checking if the user completed the auth data correctly
 export function isSignDtoValid(body: unknown): body is SignDto {
   if (typeof body !== "object" || body === null) return false;

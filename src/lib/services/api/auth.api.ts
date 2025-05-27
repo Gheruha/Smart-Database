@@ -46,6 +46,11 @@ class AuthService {
   async signOut(): Promise<ApiResponse> {
     return this.fetchApi("signOut", { method: "POST" });
   }
+
+  // Redirects the user to the Google OAuth sign-in route
+  async signInWithGoogle(): Promise<void> {
+    window.location.href = "/api/auth/googleOAuth";
+  }
 }
 
 export const authService = new AuthService();

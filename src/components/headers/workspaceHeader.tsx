@@ -33,10 +33,10 @@ export function WorkspaceHeader() {
         </Link>
       </div>
       <div className="flex space-x-2">
+        <ThemeToggle />
         <Button variant={"outline"} onClick={handleSignOut}>
           Sign Out
         </Button>
-        <ThemeToggle />
       </div>
     </header>
   );

@@ -53,3 +53,12 @@ export function useAuthHandlers() {
 
   return { signUpHandler, signInHandler };
 }
+
+// Sign In with Google OAuth Handler
+export const signInWithGoogleHandler = async (): Promise<void> => {
+  try {
+    await authService.signInWithGoogle();
+  } catch (error: unknown) {
+    handleError(error);
+  }
+};
