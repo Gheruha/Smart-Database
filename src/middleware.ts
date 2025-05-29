@@ -22,10 +22,11 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const isPublicRoot = pathname === "/";
   const isAuthRoot = pathname.startsWith("/auth");
+  const isSchoolMateRoot = pathname.startsWith("/schoolmate");
 
   // If there is no session
   if (!session) {
-    if (isPublicRoot || isAuthRoot) {
+    if (isPublicRoot || isAuthRoot || isSchoolMateRoot) {
       return res;
     }
 
@@ -38,7 +39,7 @@ export async function middleware(req: NextRequest) {
       return res;
     }
 
-    if (isPublicRoot || isAuthRoot) {
+    if (isAuthRoot) {
       return NextResponse.redirect(new URL("/workspace", req.url));
     }
   }

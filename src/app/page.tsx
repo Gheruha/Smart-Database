@@ -64,7 +64,7 @@ export default function Home() {
                 scale={1}
               />
               <button className="relative inline-flex items-center gap-1 rounded-md px-2.5 py-1.5 text-md bg-background text-black dark:bg-zinc-950 dark:text-zinc-50 outline outline-1 outline-[#fff2f21f]">
-                <Link href="/">SchoolMate AI</Link>
+                <Link href="/schoolmate">SchoolMate AI</Link>
               </button>
             </div>
           </div>

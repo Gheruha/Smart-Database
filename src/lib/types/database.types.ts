@@ -47,6 +47,13 @@ export type Database = {
             foreignKeyName: "absences_student_id_fkey"
             columns: ["student_id"]
             isOneToOne: false
+            referencedRelation: "v_best_grades"
+            referencedColumns: ["student_id"]
+          },
+          {
+            foreignKeyName: "absences_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
             referencedRelation: "v_student_performance"
             referencedColumns: ["student_id"]
           },
@@ -96,6 +103,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "elevi"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "behavior_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "v_best_grades"
+            referencedColumns: ["student_id"]
           },
           {
             foreignKeyName: "behavior_student_id_fkey"
@@ -204,6 +218,13 @@ export type Database = {
             foreignKeyName: "grades_student_id_fkey"
             columns: ["student_id"]
             isOneToOne: false
+            referencedRelation: "v_best_grades"
+            referencedColumns: ["student_id"]
+          },
+          {
+            foreignKeyName: "grades_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
             referencedRelation: "v_student_performance"
             referencedColumns: ["student_id"]
           },
@@ -260,6 +281,27 @@ export type Database = {
         }
         Relationships: []
       }
+      prompts: {
+        Row: {
+          created_at: string | null
+          id: number
+          key: string
+          prompt: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          key: string
+          prompt: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          key?: string
+          prompt?: string
+        }
+        Relationships: []
+      }
       users: {
         Row: {
           id: number
@@ -280,6 +322,15 @@ export type Database = {
       }
     }
     Views: {
+      v_best_grades: {
+        Row: {
+          overall_avg_grade: number | null
+          student_id: number | null
+          student_name: string | null
+          total_absences: number | null
+        }
+        Relationships: []
+      }
       v_group_average: {
         Row: {
           avg_grade: number | null
@@ -326,7 +377,10 @@ export type Database = {
       }
     }
     Functions: {
-      [_ in never]: never
+      get_prompt: {
+        Args: { p_key: string }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
