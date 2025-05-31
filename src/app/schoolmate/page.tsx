@@ -4,11 +4,8 @@ import { Chat } from "@/components/chat/chat";
 
 const SchoolMate = () => {
   return (
-    <div>
-      School Mate
-      <div>
-        <Chat />
-      </div>
+    <div className="pt-20">
+      <Chat />
     </div>
   );
 };

@@ -26,7 +26,7 @@ export function WorkspaceHeader() {
   };
 
   return (
-    <header className="fixed top-0 w-full flex items-center justify-between px-4 py-2 border-b border-border z-50">
+    <header className="fixed top-0 w-full flex items-center justify-between px-4 py-2 border-b border-border bg-white dark:bg-zinc-950 z-50">
       <div>
         <Link href="/">
           <DatabaseZap />

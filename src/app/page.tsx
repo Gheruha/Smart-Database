@@ -52,7 +52,7 @@ export default function Home() {
             </TextEffect>
           </div>
           <div className="flex space-x-4 motion-preset-slide-up ">
-            <Button>
+            <Button className="">
               <Link href="/auth?mode=SignUp">Get started</Link>
             </Button>
             <div className="relative">

@@ -1,73 +1,110 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { sendMessageHandler } from "@/app/schoolmate/handleFunctions";
 import { ChatDto } from "@/lib/types/chat.type";
-
-interface HistoryItem {
-  from: "user" | "bot";
-  text: string;
-}
+import { HistoryItemDto } from "@/lib/types/history.type";
+import { Button } from "../ui/button";
+import { SendHorizonal } from "lucide-react";
+import { TextLoop } from "../motion-primitives/text-loop";
 
 export function Chat({ promptKey = "Student" }: { promptKey?: string }) {
   const [msg, setMsg] = useState("");
-  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [history, setHistory] = useState<HistoryItemDto[]>([]);
   const [loading, setLoading] = useState(false);
+
+  // 1) Create a ref for the scrollable container
+  const containerRef = useRef<HTMLDivElement>(null);
 
   async function send() {
     const trimmed = msg.trim();
     if (!trimmed) return;
 
-    // 1) Append user message to history
+    // Append user message to history
     setHistory((h) => [...h, { from: "user", text: trimmed }]);
     setLoading(true);
 
     try {
-      // 2) Call our handler instead of fetch directly
+      // Reset the input immediately so the user can type again
+      setMsg("");
+
+      // Call handler
       const payload: ChatDto = { promptKey, userMessage: trimmed };
       const reply = await sendMessageHandler(payload);
 
-      // 3) Append bot’s reply to history
+      // Append bot’s reply to history
       setHistory((h) => [...h, { from: "bot", text: reply }]);
-      setMsg("");
     } catch {
       // Error was already toasted by handleError inside sendMessageHandler
-      // We could optionally append an error message to history here, but
-      // since error→toast, we’ll just stop loading and leave it at that.
     } finally {
       setLoading(false);
     }
   }
 
+  // 2) Whenever `history` or `loading` changes, scroll to bottom
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    container.scrollTop = container.scrollHeight;
+  }, [history, loading]);
+
   return (
-    <div className="flex flex-col space-y-4 p-4 border rounded">
-      <div className="flex-1 overflow-auto space-y-2">
+    <div className="flex flex-col p-4 items-center w-full h-[75vh] lg:h-[80vh]">
+      {/* 3) Attach the ref to the scrollable area */}
+      <div
+        ref={containerRef}
+        className="flex-1 overflow-auto space-y-8 w-full lg:w-2/4"
+      >
         {history.map((m, i) => (
           <div
             key={i}
-            className={m.from === "bot" ? "text-green-700" : "text-blue-700"}
+            className={`flex ${
+              m.from === "user" ? "justify-end" : "justify-start"
+            }`}
           >
-            <strong>{m.from === "bot" ? "Bot:" : "You:"}</strong> {m.text}
+            <div
+              className={`
+                ${
+                  m.from === "bot"
+                    ? "motion-preset-fade"
+                    : "bg-secondary motion-preset-fade"
+                }
+                px-3 py-2 rounded-lg max-w-[100%]
+              `}
+            >
+              {m.text}
+            </div>
           </div>
         ))}
-        {loading && <em>Bot is typing…</em>}
+
+        {/* 4) Loading indicator also counts as “new content” */}
+        {loading && (
+          <TextLoop className="font-mono text-sm">
+            <span>Thinking</span>
+            <span>Generating a response</span>
+          </TextLoop>
+        )}
       </div>
 
-      <div className="flex">
+      <div
+        className="
+          fixed flex justify-between  
+          border lg:rounded-lg 
+          focus-within:border w-full bottom-0 p-4 pb-20 rounded-xl 
+          lg:w-2/4 lg:bottom-10 lg:p-4 bg-secondary
+        "
+      >
         <input
-          className="flex-1 border rounded p-2"
+          className="flex-1 focus:outline-none"
           value={msg}
           onChange={(e) => setMsg(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && send()}
-          placeholder="Type your message…"
+          placeholder="Ask anything"
         />
-        <button
-          className="ml-2 px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
-          onClick={send}
-          disabled={loading}
-        >
-          Send
-        </button>
+        <Button className="rounded-full" onClick={send} disabled={loading}>
+          <SendHorizonal />
+        </Button>
       </div>
     </div>
   );
