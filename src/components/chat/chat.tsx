@@ -50,7 +50,7 @@ export function Chat({ promptKey = "Student" }: { promptKey?: string }) {
   }, [history, loading]);
 
   return (
-    <div className="flex flex-col p-4 items-center w-full h-[75vh] lg:h-[80vh]">
+    <div className="flex flex-col p-4 items-center w-full h-[70vh] lg:h-[80vh] ">
       {/* 3) Attach the ref to the scrollable area */}
       <div
         ref={containerRef}

@@ -1,35 +1,21 @@
 "use client";
-
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
 import { WorkspaceHeader } from "@/components/headers/workspaceHeader";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar/app-sidebar";
 
 interface SchoolMateLayoutProps {
   children: React.ReactNode;
 }
 
 export default function SchoolMateLayout({ children }: SchoolMateLayoutProps) {
-  const router = useRouter();
-
-  const handleGoBack = () => {
-    router.push("/");
-  };
-
   return (
-    <main className="w-full">
+    <SidebarProvider>
       <WorkspaceHeader />
-      <div className="absolute top-16">
-        <Button
-          onClick={handleGoBack}
-          variant="link"
-          className="flex items-center gap-1"
-        >
-          <ArrowLeft size={15} />
-          <p>Back</p>
-        </Button>
-      </div>
-      {children}
-    </main>
+      <AppSidebar />
+      <main className="w-full h-[100vh]">
+        <SidebarTrigger className="mt-14" />
+        {children}
+      </main>
+    </SidebarProvider>
   );
 }

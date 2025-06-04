@@ -4,7 +4,7 @@ import { Chat } from "@/components/chat/chat";
 
 const SchoolMate = () => {
   return (
-    <div className="pt-20">
+    <div>
       <Chat />
     </div>
   );
