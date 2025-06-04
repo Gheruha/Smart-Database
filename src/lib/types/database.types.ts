@@ -141,6 +141,21 @@ export type Database = {
           },
         ]
       }
+      conversations: {
+        Row: {
+          created_at: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
       elevi: {
         Row: {
           adresa: string
@@ -281,6 +296,38 @@ export type Database = {
         }
         Relationships: []
       }
+      messages: {
+        Row: {
+          content: string
+          conversation_id: string | null
+          created_at: string | null
+          id: string
+          sender: string
+        }
+        Insert: {
+          content: string
+          conversation_id?: string | null
+          created_at?: string | null
+          id?: string
+          sender: string
+        }
+        Update: {
+          content?: string
+          conversation_id?: string | null
+          created_at?: string | null
+          id?: string
+          sender?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       prompts: {
         Row: {
           created_at: string | null
@@ -377,6 +424,14 @@ export type Database = {
       }
     }
     Functions: {
+      get_conversation_by_id: {
+        Args: { p_conversation_id: string }
+        Returns: {
+          sender: string
+          content: string
+          created_at: string
+        }[]
+      }
       get_prompt: {
         Args: { p_key: string }
         Returns: string
