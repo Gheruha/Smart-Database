@@ -15,7 +15,7 @@ export function AppSidebar() {
     router.push("/");
   };
   return (
-    <Sidebar >
+    <Sidebar className="mt-12">
       <SidebarHeader className="items-start">
         <Button onClick={handleGoBack} variant="link" className="flex gap-1">
           <ArrowLeft size={15} />
