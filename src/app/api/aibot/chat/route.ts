@@ -1,10 +1,11 @@
 import { NextResponse, NextRequest } from "next/server";
 import { ChatDto } from "@/lib/types/chat.type";
-import { generateChatBotReply } from "@/lib/utils/chat/chat.utils";
+import { generateChatBotReply, saveMessage } from "@/lib/utils/chat/chat.utils";
 export async function POST(req: NextRequest) {
   try {
     // Taking the key(type of bot) and user message
-    const { promptKey, userMessage } = (await req.json()) as ChatDto;
+    const { promptKey, userMessage, conversationId } =
+      (await req.json()) as ChatDto;
 
     // Make sure userMessage is non-empty and not absurdly long:
     if (typeof userMessage !== "string" || userMessage.trim().length === 0) {
@@ -20,8 +21,34 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    if (!conversationId) {
+      return NextResponse.json(
+        { message: "Missing conversationId." },
+        { status: 400 }
+      );
+    }
+
+    // Saving user's message in db
+    await saveMessage({
+      conversationId,
+      sender: "user",
+      content: userMessage,
+    });
+
     // Calling the function that deals with the api and receiving the bot reply
-    const reply = await generateChatBotReply({ promptKey, userMessage });
+    const reply = await generateChatBotReply({
+      promptKey,
+      userMessage,
+      conversationId,
+    });
+
+    // Save the bot’s reply in db
+    await saveMessage({
+      conversationId,
+      sender: "bot",
+      content: reply,
+    });
+
     return NextResponse.json({
       reply,
     });

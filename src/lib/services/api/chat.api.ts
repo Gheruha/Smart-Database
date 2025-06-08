@@ -1,5 +1,6 @@
 import { ChatDto } from "@/lib/types/chat.type";
 import { ChatResponseDto } from "@/lib/types/chat.type";
+import { HistoryItemDto } from "@/lib/types/history.type";
 type ApiResponse<T = { message: string }> = T;
 
 class ChatService {
@@ -31,6 +32,14 @@ class ChatService {
       method: "POST",
       body: JSON.stringify(payload),
     });
+  }
+
+  async getMessages(conversationId: string): Promise<HistoryItemDto[]> {
+    const { history } = await this.fetchApi<{ history: HistoryItemDto[] }>(
+      `history?conversationId=${conversationId}`,
+      { method: "GET" }
+    );
+    return history;
   }
 }
 

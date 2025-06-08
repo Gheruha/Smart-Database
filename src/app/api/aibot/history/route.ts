@@ -12,10 +12,10 @@ export async function GET(req: NextRequest) {
     }
 
     // Fetch previous messages
-    const reply = getChatConversationById(conversationId);
+    const history = await getChatConversationById(conversationId);
 
     return NextResponse.json({
-      reply,
+      history,
     });
   } catch (error: unknown) {
     console.error("Chat error:", error);

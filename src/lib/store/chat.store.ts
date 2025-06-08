@@ -34,7 +34,7 @@ export const useChatStore = create<ChatStore>()(
       clearHistory: () => set({ history: [] }),
     }),
     {
-      name: "workspace-storage",
+      name: "chat-storage",
     }
   )
 );
