@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { Chat } from "@/components/chat/chat";
-import { useInitConversation } from "@/app/schoolmate/handleFunctions";
+import { useInitConversation } from "@/app/datamate/handleFunctions";
 
 export default function SchoolMate() {
   const pathname = usePathname() || "";

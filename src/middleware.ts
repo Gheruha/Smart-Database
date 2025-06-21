@@ -18,15 +18,16 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  // Give the user with session acces to specific pages
+  // Give the user with session access to specific pages
   const { pathname } = req.nextUrl;
   const isPublicRoot = pathname === "/";
   const isAuthRoot = pathname.startsWith("/auth");
-  const isSchoolMateRoot = pathname.startsWith("/schoolmate");
+  const isDataMateRoot = pathname.startsWith("/datamate");
+  const isWorkspace = pathname.startsWith("/workspace");
 
   // If there is no session
   if (!session) {
-    if (isPublicRoot || isAuthRoot || isSchoolMateRoot) {
+    if (isPublicRoot || isAuthRoot) {
       return res;
     }
 
@@ -35,7 +36,7 @@ export async function middleware(req: NextRequest) {
 
   // If there is a session
   if (session) {
-    if (pathname.startsWith("/workspace")) {
+    if (isWorkspace || isDataMateRoot) {
       return res;
     }
 

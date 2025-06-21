@@ -3,11 +3,11 @@ import { WorkspaceHeader } from "@/components/headers/workspaceHeader";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar/app-sidebar";
 
-interface SchoolMateLayoutProps {
+interface DataMateLayoutProps {
   children: React.ReactNode;
 }
 
-export default function SchoolMateLayout({ children }: SchoolMateLayoutProps) {
+export default function DataMateLayout({ children }: DataMateLayoutProps) {
   return (
     <SidebarProvider>
       <WorkspaceHeader />
@@ -16,6 +16,6 @@ export default function SchoolMateLayout({ children }: SchoolMateLayoutProps) {
         <SidebarTrigger className="mt-14" />
         {children}
       </main>
-    </SidebarProvider>
+    </SidebarProvider>    
   );
-}
+} 

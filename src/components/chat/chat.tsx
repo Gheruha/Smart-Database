@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { sendMessageHandler } from "@/app/schoolmate/handleFunctions";
+import { sendMessageHandler } from "@/app/datamate/handleFunctions";
 import { ChatDto } from "@/lib/types/chat.type";
 import { Button } from "../ui/button";
 import { SendHorizonal } from "lucide-react";
