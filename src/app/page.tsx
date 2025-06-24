@@ -52,9 +52,9 @@ export default function Home() {
             </TextEffect>
           </div>
           <div className="flex space-x-4 motion-preset-slide-up ">
-            <Button className="">
-              <Link href="/auth?mode=SignUp">Get started</Link>
-            </Button>
+            <Link href="/auth?mode=SignUp">
+              <Button className="">Get started</Button>
+            </Link>
             <div className="relative">
               <GlowEffect
                 colors={["#FF5733", "#33FF57", "#3357FF", "#F1C40F"]}

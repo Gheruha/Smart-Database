@@ -16,6 +16,6 @@ export default function DataMateLayout({ children }: DataMateLayoutProps) {
         <SidebarTrigger className="mt-14" />
         {children}
       </main>
-    </SidebarProvider>    
+    </SidebarProvider>
   );
-} 
+}

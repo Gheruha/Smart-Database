@@ -9,138 +9,6 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      absences: {
-        Row: {
-          id: number
-          lesson_id: number
-          nr: number
-          student_id: number
-        }
-        Insert: {
-          id?: number
-          lesson_id: number
-          nr: number
-          student_id: number
-        }
-        Update: {
-          id?: number
-          lesson_id?: number
-          nr?: number
-          student_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "absences_lesson_id_fkey"
-            columns: ["lesson_id"]
-            isOneToOne: false
-            referencedRelation: "lessons"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "absences_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "elevi"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "absences_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_best_grades"
-            referencedColumns: ["student_id"]
-          },
-          {
-            foreignKeyName: "absences_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_student_performance"
-            referencedColumns: ["student_id"]
-          },
-          {
-            foreignKeyName: "absences_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_students_best"
-            referencedColumns: ["student_id"]
-          },
-          {
-            foreignKeyName: "absences_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_students_best_grades"
-            referencedColumns: ["student_id"]
-          },
-          {
-            foreignKeyName: "absences_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_students_failed"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
-      behavior: {
-        Row: {
-          grade: number
-          id: number
-          student_id: number
-        }
-        Insert: {
-          grade: number
-          id?: number
-          student_id: number
-        }
-        Update: {
-          grade?: number
-          id?: number
-          student_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "behavior_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "elevi"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "behavior_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_best_grades"
-            referencedColumns: ["student_id"]
-          },
-          {
-            foreignKeyName: "behavior_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_student_performance"
-            referencedColumns: ["student_id"]
-          },
-          {
-            foreignKeyName: "behavior_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_students_best"
-            referencedColumns: ["student_id"]
-          },
-          {
-            foreignKeyName: "behavior_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_students_best_grades"
-            referencedColumns: ["student_id"]
-          },
-          {
-            foreignKeyName: "behavior_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_students_failed"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
       conversations: {
         Row: {
           created_at: string | null
@@ -153,146 +21,6 @@ export type Database = {
         Update: {
           created_at?: string | null
           id?: string
-        }
-        Relationships: []
-      }
-      elevi: {
-        Row: {
-          adresa: string
-          data_nasterii: string
-          id: number
-          id_grupa: number
-          nume: string
-        }
-        Insert: {
-          adresa: string
-          data_nasterii: string
-          id?: number
-          id_grupa: number
-          nume: string
-        }
-        Update: {
-          adresa?: string
-          data_nasterii?: string
-          id?: number
-          id_grupa?: number
-          nume?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "elevi_id_grupa_fkey"
-            columns: ["id_grupa"]
-            isOneToOne: false
-            referencedRelation: "groups"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "elevi_id_grupa_fkey"
-            columns: ["id_grupa"]
-            isOneToOne: false
-            referencedRelation: "v_group_average"
-            referencedColumns: ["group_id"]
-          },
-        ]
-      }
-      grades: {
-        Row: {
-          grade: number
-          id: number
-          lesson_id: number
-          student_id: number
-        }
-        Insert: {
-          grade: number
-          id?: number
-          lesson_id: number
-          student_id: number
-        }
-        Update: {
-          grade?: number
-          id?: number
-          lesson_id?: number
-          student_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "grades_lesson_id_fkey"
-            columns: ["lesson_id"]
-            isOneToOne: false
-            referencedRelation: "lessons"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "grades_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "elevi"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "grades_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_best_grades"
-            referencedColumns: ["student_id"]
-          },
-          {
-            foreignKeyName: "grades_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_student_performance"
-            referencedColumns: ["student_id"]
-          },
-          {
-            foreignKeyName: "grades_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_students_best"
-            referencedColumns: ["student_id"]
-          },
-          {
-            foreignKeyName: "grades_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_students_best_grades"
-            referencedColumns: ["student_id"]
-          },
-          {
-            foreignKeyName: "grades_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "v_students_failed"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
-      groups: {
-        Row: {
-          id: number
-          name: string
-        }
-        Insert: {
-          id?: number
-          name: string
-        }
-        Update: {
-          id?: number
-          name?: string
-        }
-        Relationships: []
-      }
-      lessons: {
-        Row: {
-          id: number
-          name: string
-        }
-        Insert: {
-          id?: number
-          name: string
-        }
-        Update: {
-          id?: number
-          name?: string
         }
         Relationships: []
       }
@@ -349,79 +77,65 @@ export type Database = {
         }
         Relationships: []
       }
-      users: {
+      sidebar_groups: {
         Row: {
-          id: number
-          name: string
-          parola: string
+          group_id: string
+          group_name: string
+          icon: string
+          open_icon: string
+          position: number
         }
         Insert: {
-          id?: number
-          name: string
-          parola: string
+          group_id?: string
+          group_name: string
+          icon: string
+          open_icon: string
+          position?: number
         }
         Update: {
-          id?: number
-          name?: string
-          parola?: string
+          group_id?: string
+          group_name?: string
+          icon?: string
+          open_icon?: string
+          position?: number
         }
         Relationships: []
+      }
+      sidebar_items: {
+        Row: {
+          group_id: string
+          item_icon: string | null
+          item_id: string
+          item_name: string
+          position: number
+        }
+        Insert: {
+          group_id: string
+          item_icon?: string | null
+          item_id?: string
+          item_name: string
+          position?: number
+        }
+        Update: {
+          group_id?: string
+          item_icon?: string | null
+          item_id?: string
+          item_name?: string
+          position?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sidebar_items_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "sidebar_groups"
+            referencedColumns: ["group_id"]
+          },
+        ]
       }
     }
     Views: {
-      v_best_grades: {
-        Row: {
-          overall_avg_grade: number | null
-          student_id: number | null
-          student_name: string | null
-          total_absences: number | null
-        }
-        Relationships: []
-      }
-      v_group_average: {
-        Row: {
-          avg_grade: number | null
-          group_id: number | null
-          group_name: string | null
-        }
-        Relationships: []
-      }
-      v_student_performance: {
-        Row: {
-          overall_avg_grade: number | null
-          student_id: number | null
-          student_name: string | null
-          total_absences: number | null
-        }
-        Relationships: []
-      }
-      v_students_best: {
-        Row: {
-          overall_avg_grade: number | null
-          student_id: number | null
-          student_name: string | null
-          total_absences: number | null
-        }
-        Relationships: []
-      }
-      v_students_best_grades: {
-        Row: {
-          overall_avg_grade: number | null
-          student_id: number | null
-          student_name: string | null
-          total_absences: number | null
-        }
-        Relationships: []
-      }
-      v_students_failed: {
-        Row: {
-          overall_avg_grade: number | null
-          student_id: number | null
-          student_name: string | null
-          total_absences: number | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       get_conversation_by_id: {
@@ -435,6 +149,17 @@ export type Database = {
       get_prompt: {
         Args: { p_key: string }
         Returns: string
+      }
+      get_sidebar_structure: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          group_id: string
+          group_name: string
+          icon: string
+          open_icon: string
+          position: number
+          sidebar_items: Json
+        }[]
       }
     }
     Enums: {

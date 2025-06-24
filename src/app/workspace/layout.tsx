@@ -1,4 +1,7 @@
+"use client";
+import { AppSidebar } from "@/components/app-sidebar/app-sidebar";
 import { WorkspaceHeader } from "@/components/headers/workspaceHeader";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -6,9 +9,13 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <div>
+    <SidebarProvider>
       <WorkspaceHeader />
-      {children}
-    </div>
+      <AppSidebar />
+      <main className="w-full h-[100vh]">
+        <SidebarTrigger className="mt-14" />
+        {children}
+      </main>
+    </SidebarProvider>
   );
 }

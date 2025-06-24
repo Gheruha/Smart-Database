@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { sendMessageHandler } from "@/app/datamate/handleFunctions";
 import { ChatDto } from "@/lib/types/chat.type";
 import { Button } from "../ui/button";
-import { SendHorizonal } from "lucide-react";
+import { Forward } from "lucide-react";
 import { TextLoop } from "../motion-primitives/text-loop";
 import { useChatStore } from "@/lib/store/chat.store";
 
@@ -45,10 +45,10 @@ export function Chat({ promptKey = "Student" }: { promptKey?: string }) {
   }, [history, loading]);
 
   return (
-    <div className="flex flex-col p-4 items-center w-full h-[70vh] lg:h-[80vh]">
+    <div className="flex flex-col p-4 items-center w-full h-[70vh] lg:h-[80vh] space-y-4 lg:space-y-10">
       <div
         ref={containerRef}
-        className="flex-1 overflow-auto space-y-8 w-full lg:w-2/4"
+        className="flex-1 overflow-auto space-y-8 w-full lg:w-3/4"
       >
         {history.map((m, i) => (
           <div
@@ -80,7 +80,7 @@ export function Chat({ promptKey = "Student" }: { promptKey?: string }) {
         )}
       </div>
 
-      <div className="fixed flex justify-between border lg:rounded-lg w-full bottom-0 p-4 pb-20 rounded-xl lg:w-2/4 lg:bottom-10 lg:p-4 bg-secondary">
+      <div className="fixed flex justify-between border lg:rounded-lg w-full bottom-0 p-4 pb-20 md:rounded-xl lg:w-3/4 lg:bottom-10 lg:p-4 bg-secondary">
         <input
           className="flex-1 focus:outline-none"
           value={msg}
@@ -89,7 +89,7 @@ export function Chat({ promptKey = "Student" }: { promptKey?: string }) {
           placeholder="Ask anything"
         />
         <Button className="rounded-full" onClick={send} disabled={loading}>
-          <SendHorizonal />
+          <Forward />
         </Button>
       </div>
     </div>
