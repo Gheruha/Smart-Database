@@ -1,20 +1,20 @@
-"use client";
-import React from "react";
-import { useSignForm } from "@/app/auth/validationSchema";
+'use client';
+import React from 'react';
+import { useSignForm } from '@/app/auth/validationSchema';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import Link from "next/link";
-import { SubmitHandler } from "react-hook-form";
-import { SignDto } from "@/lib/types/auth.type";
-export type AuthMode = "signup" | "signin";
+} from '@/components/ui/card';
+import { Label } from '../ui/label';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
+import Link from 'next/link';
+import { SubmitHandler } from 'react-hook-form';
+import { SignDto } from '@/lib/types/auth.type';
+export type AuthMode = 'signup' | 'signin';
 
 interface SignFormProps {
   mode: AuthMode;
@@ -22,16 +22,16 @@ interface SignFormProps {
 }
 
 export default function SignForm({ mode, onSubmit }: SignFormProps) {
-  const isSignUp = mode === "signup";
-  const title = isSignUp ? "Sign Up" : "Sign In";
+  const isSignUp = mode === 'signup';
+  const title = isSignUp ? 'Sign Up' : 'Sign In';
   const description = isSignUp
-    ? "Complete all the fields to create an account."
-    : "Enter your credentials to sign in.";
-  const buttonText = isSignUp ? "Create an account" : "Sign In";
+    ? 'Complete all the fields to create an account.'
+    : 'Enter your credentials to sign in.';
+  const buttonText = isSignUp ? 'Create an account' : 'Sign In';
   const linkMessage = isSignUp
-    ? "Already have an account?"
+    ? 'Already have an account?'
     : "Don't have an account yet?";
-  const link = isSignUp ? "/auth?mode=signIn" : "/auth?mode=signUp";
+  const link = isSignUp ? '/auth?mode=signIn' : '/auth?mode=signUp';
 
   const {
     register,
@@ -53,7 +53,7 @@ export default function SignForm({ mode, onSubmit }: SignFormProps) {
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
-                  {...register("email")}
+                  {...register('email')}
                   type="text"
                   placeholder="example@yourmail.com"
                 />
@@ -65,7 +65,7 @@ export default function SignForm({ mode, onSubmit }: SignFormProps) {
                 <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
-                  {...register("password")}
+                  {...register('password')}
                   type="text"
                   placeholder="At least 8 characters & one capital letter"
                 />

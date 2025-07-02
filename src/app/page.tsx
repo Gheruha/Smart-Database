@@ -1,9 +1,9 @@
-import Footer from "@/components/footer/footer";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { Header } from "@/components/headers/header";
-import { GlowEffect } from "@/components/motion-primitives/glow-effect";
-import { TextEffect } from "@/components/motion-primitives/text-effect";
+import Footer from '@/components/footer/footer';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { Header } from '@/components/headers/header';
+import { GlowEffect } from '@/components/motion-primitives/glow-effect';
+import { TextEffect } from '@/components/motion-primitives/text-effect';
 
 export default function Home() {
   return (
@@ -57,7 +57,7 @@ export default function Home() {
             </Link>
             <div className="relative">
               <GlowEffect
-                colors={["#FF5733", "#33FF57", "#3357FF", "#F1C40F"]}
+                colors={['#FF5733', '#33FF57', '#3357FF', '#F1C40F']}
                 mode="colorShift"
                 blur="soft"
                 duration={3}

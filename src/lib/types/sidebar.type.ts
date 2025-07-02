@@ -3,6 +3,7 @@ export interface SidebarItemDto {
   item_name: string;
   item_icon: string;
   position: number;
+  function: string;
 }
 
 export interface SidebarGroup {

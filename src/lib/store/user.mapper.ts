@@ -1,10 +1,10 @@
-import { User } from "@/lib/types/user.type";
+import { User } from '@/lib/types/user.type';
 export interface UserResponse {
   id: string;
   email?: string;
 }
 export const mapUserData = async (
-  responseData: UserResponse
+  responseData: UserResponse,
 ): Promise<User> => {
   return {
     id: responseData.id,

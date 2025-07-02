@@ -1,6 +1,6 @@
-import { NextResponse, NextRequest } from "next/server";
-import { ChatDto } from "@/lib/types/chat.type";
-import { generateChatBotReply, saveMessage } from "@/lib/utils/chat/chat.utils";
+import { NextResponse, NextRequest } from 'next/server';
+import { ChatDto } from '@/lib/types/chat.type';
+import { generateChatBotReply, saveMessage } from '@/lib/utils/chat/chat.utils';
 export async function POST(req: NextRequest) {
   try {
     // Taking the key(type of bot) and user message
@@ -8,30 +8,30 @@ export async function POST(req: NextRequest) {
       (await req.json()) as ChatDto;
 
     // Make sure userMessage is non-empty and not absurdly long:
-    if (typeof userMessage !== "string" || userMessage.trim().length === 0) {
+    if (typeof userMessage !== 'string' || userMessage.trim().length === 0) {
       return NextResponse.json(
-        { message: "Your message cannot be empty" },
-        { status: 400 }
+        { message: 'Your message cannot be empty' },
+        { status: 400 },
       );
     }
     if (userMessage.length > 2000) {
       return NextResponse.json(
-        { message: "Your message is too long" },
-        { status: 400 }
+        { message: 'Your message is too long' },
+        { status: 400 },
       );
     }
 
     if (!conversationId) {
       return NextResponse.json(
-        { message: "Missing conversationId." },
-        { status: 400 }
+        { message: 'Missing conversationId.' },
+        { status: 400 },
       );
     }
 
     // Saving user's message in db
     await saveMessage({
       conversationId,
-      sender: "user",
+      sender: 'user',
       content: userMessage,
     });
 
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
     // Save the bot’s reply in db
     await saveMessage({
       conversationId,
-      sender: "bot",
+      sender: 'bot',
       content: reply,
     });
 
@@ -55,9 +55,9 @@ export async function POST(req: NextRequest) {
 
     // Catch any error
   } catch (error: unknown) {
-    console.error("Chat error:", error);
+    console.error('Chat error:', error);
     const errorMessage =
-      error instanceof Error ? error.message : "Internal server error";
+      error instanceof Error ? error.message : 'Internal server error';
     return NextResponse.json({ message: errorMessage }, { status: 500 });
   }
 }

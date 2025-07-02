@@ -55,8 +55,8 @@ export function GlowEffect({
     },
     pulse: {
       background: colors.map(
-        (color) =>
-          `radial-gradient(circle at 50% 50%, ${color} 0%, transparent 100%)`
+        color =>
+          `radial-gradient(circle at 50% 50%, ${color} 0%, transparent 100%)`,
       ),
       scale: [1 * scale, 1.1 * scale, 1 * scale],
       opacity: [0.5, 0.8, 0.5],
@@ -70,8 +70,8 @@ export function GlowEffect({
     breathe: {
       background: [
         ...colors.map(
-          (color) =>
-            `radial-gradient(circle at 50% 50%, ${color} 0%, transparent 100%)`
+          color =>
+            `radial-gradient(circle at 50% 50%, ${color} 0%, transparent 100%)`,
         ),
       ],
       scale: [1 * scale, 1.05 * scale, 1 * scale],
@@ -95,7 +95,7 @@ export function GlowEffect({
       },
     },
     flowHorizontal: {
-      background: colors.map((color) => {
+      background: colors.map(color => {
         const nextColor = colors[(colors.indexOf(color) + 1) % colors.length];
         return `linear-gradient(to right, ${color}, ${nextColor})`;
       }),
@@ -144,7 +144,7 @@ export function GlowEffect({
         'pointer-events-none absolute inset-0 h-full w-full',
         'scale-[var(--scale)] transform-gpu',
         getBlurClass(blur),
-        className
+        className,
       )}
     />
   );

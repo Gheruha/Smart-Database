@@ -1,16 +1,16 @@
 // app/schoolmate/handleFunctions.tsx
-"use client";
+'use client';
 
-import { useCallback, useRef } from "react";
-import { useChatStore } from "@/lib/store/chat.store";
-import { HistoryItemDto } from "@/lib/types/history.type";
-import { chatService } from "@/lib/services/api/chat.api";
-import { ChatDto } from "@/lib/types/chat.type";
-import { toast } from "sonner";
+import { useCallback, useRef } from 'react';
+import { useChatStore } from '@/lib/store/chat.store';
+import { HistoryItemDto } from '@/lib/types/history.type';
+import { chatService } from '@/lib/services/api/chat.api';
+import { ChatDto } from '@/lib/types/chat.type';
+import { toast } from 'sonner';
 
 // Error -> toast
 const handleError = (error: unknown) => {
-  const msg = error instanceof Error ? error.message : "Unknown error";
+  const msg = error instanceof Error ? error.message : 'Unknown error';
   toast.error(msg);
 };
 
@@ -27,10 +27,10 @@ export const sendMessageHandler = async (data: ChatDto): Promise<string> => {
 
 // Hook to initialize a conversation
 export function useInitConversation() {
-  const setConversationId = useChatStore((s) => s.setConversationId);
-  const clearHistory = useChatStore((s) => s.clearHistory);
-  const addUserMessage = useChatStore((s) => s.addUserMessage);
-  const addBotMessage = useChatStore((s) => s.addBotMessage);
+  const setConversationId = useChatStore(s => s.setConversationId);
+  const clearHistory = useChatStore(s => s.clearHistory);
+  const addUserMessage = useChatStore(s => s.addUserMessage);
+  const addBotMessage = useChatStore(s => s.addBotMessage);
 
   // this ref will survive across remounts in dev StrictMode
   const hasFetchedRef = useRef(false);
@@ -49,18 +49,17 @@ export function useInitConversation() {
 
       try {
         // fetch history exactly once
-        const serverHistory: HistoryItemDto[] = await chatService.getMessages(
-          id
-        );
-        serverHistory.forEach((m) =>
-          m.from === "user" ? addUserMessage(m.text) : addBotMessage(m.text)
+        const serverHistory: HistoryItemDto[] =
+          await chatService.getMessages(id);
+        serverHistory.forEach(m =>
+          m.from === 'user' ? addUserMessage(m.text) : addBotMessage(m.text),
         );
       } catch (e) {
-        const msg = e instanceof Error ? e.message : "Unknown error";
+        const msg = e instanceof Error ? e.message : 'Unknown error';
         toast.error(msg);
       }
     },
-    [clearHistory, setConversationId, addUserMessage, addBotMessage]
+    [clearHistory, setConversationId, addUserMessage, addBotMessage],
   );
 
   return { init };

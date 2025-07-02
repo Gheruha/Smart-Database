@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createSupabaseClientMiddleware } from "@/lib/supabase/client";
+import { NextRequest, NextResponse } from 'next/server';
+import { createSupabaseClientMiddleware } from '@/lib/supabase/client';
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
@@ -10,28 +10,28 @@ export async function middleware(req: NextRequest) {
 
   if (error) {
     if (error) {
-      console.error("Error fetching session:", error.message);
+      console.error('Error fetching session:', error.message);
       return NextResponse.json(
-        { message: "Failed to authenticate" },
-        { status: 500 }
+        { message: 'Failed to authenticate' },
+        { status: 500 },
       );
     }
   }
 
   // Give the user with session access to specific pages
   const { pathname } = req.nextUrl;
-  const isPublicRoot = pathname === "/";
-  const isAuthRoot = pathname.startsWith("/auth");
-  const isDataMateRoot = pathname.startsWith("/datamate");
-  const isWorkspace = pathname.startsWith("/workspace");
+  const isPublicRoot = pathname === '/';
+  const isAuthRoot = pathname.startsWith('/auth');
+  const isDataMateRoot = pathname.startsWith('/datamate');
+  const isWorkspace = pathname.startsWith('/workspace');
 
   // If there is no session
   if (!session) {
-    if (isPublicRoot || isAuthRoot) {
+    if (isPublicRoot || isAuthRoot || isDataMateRoot) {
       return res;
     }
 
-    return NextResponse.redirect(new URL("/", req.url));
+    return NextResponse.redirect(new URL('/', req.url));
   }
 
   // If there is a session
@@ -41,7 +41,7 @@ export async function middleware(req: NextRequest) {
     }
 
     if (isAuthRoot) {
-      return NextResponse.redirect(new URL("/workspace", req.url));
+      return NextResponse.redirect(new URL('/workspace', req.url));
     }
   }
 
@@ -50,6 +50,6 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };

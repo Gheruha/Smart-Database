@@ -1,5 +1,5 @@
 // src/components/app-sidebar/app-sidebar.tsx
-"use client";
+'use client';
 
 import {
   Sidebar,
@@ -7,15 +7,15 @@ import {
   SidebarFooter,
   SidebarGroupContent,
   SidebarHeader,
-} from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/sidebar';
+import { Button } from '@/components/ui/button';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { useSidebarData } from "@/app/workspace/handleFunctions";
-import { IconResolver } from "../iconResolver/iconResolver";
+} from '@/components/ui/collapsible';
+import { useSidebarData } from '@/app/workspace/handleFunctions';
+import { IconResolver } from '../iconResolver/iconResolver';
 
 export function AppSidebar() {
   const groups = useSidebarData();
@@ -24,7 +24,7 @@ export function AppSidebar() {
     <Sidebar className="mt-12">
       <SidebarHeader />
       <SidebarContent>
-        {groups.map((group) => (
+        {groups.map(group => (
           <Collapsible key={group.group_id} className="w-full">
             <CollapsibleTrigger className="collapsible-trigger button-ghost flex justify-between items-center">
               <div className="flex items-center space-x-2">
@@ -34,7 +34,7 @@ export function AppSidebar() {
             </CollapsibleTrigger>
             <CollapsibleContent>
               <SidebarGroupContent className="motion-preset-fade space-y-2">
-                {group.sidebar_items.map((item) => (
+                {group.sidebar_items.map(item => (
                   <Button
                     key={item.item_id}
                     variant="ghost"

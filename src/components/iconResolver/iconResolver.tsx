@@ -1,9 +1,9 @@
 // components/IconResolver.tsx
-"use client";
+'use client';
 
-import React from "react";
-import { LucideProps } from "lucide-react";
-import { Plus, File, Folder, ChevronDown } from "lucide-react";
+import React from 'react';
+import { LucideProps } from 'lucide-react';
+import { Plus, File, Folder, ChevronDown } from 'lucide-react';
 
 const ICON_MAP: Record<string, React.ComponentType<LucideProps>> = {
   plus: Plus,
@@ -17,12 +17,12 @@ interface IconResolverProps extends LucideProps {
 }
 
 export function IconResolver({ name, ...props }: IconResolverProps) {
-  const key = name.replace(/Icon$/, "").toLowerCase();
+  const key = name.replace(/Icon$/, '').toLowerCase();
   const IconComponent = ICON_MAP[key];
 
   if (!IconComponent) {
     console.warn(
-      `IconResolver: no mapping for "${name}", using File as fallback.`
+      `IconResolver: no mapping for "${name}", using File as fallback.`,
     );
     return <File {...props} />;
   }

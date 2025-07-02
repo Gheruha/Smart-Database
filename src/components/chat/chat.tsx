@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useRef } from "react";
-import { sendMessageHandler } from "@/app/datamate/handleFunctions";
-import { ChatDto } from "@/lib/types/chat.type";
-import { Button } from "../ui/button";
-import { Forward } from "lucide-react";
-import { TextLoop } from "../motion-primitives/text-loop";
-import { useChatStore } from "@/lib/store/chat.store";
+import { useState, useEffect, useRef } from 'react';
+import { sendMessageHandler } from '@/app/datamate/handleFunctions';
+import { ChatDto } from '@/lib/types/chat.type';
+import { Button } from '../ui/button';
+import { Forward } from 'lucide-react';
+import { TextLoop } from '../motion-primitives/text-loop';
+import { useChatStore } from '@/lib/store/chat.store';
 
-export function Chat({ promptKey = "Student" }: { promptKey?: string }) {
-  const [msg, setMsg] = useState("");
+export function Chat({ promptKey = 'Student' }: { promptKey?: string }) {
+  const [msg, setMsg] = useState('');
   const [loading, setLoading] = useState(false);
-  const history = useChatStore((s) => s.history);
-  const conversationId = useChatStore((s) => s.conversationId);
-  const addUserMessage = useChatStore((s) => s.addUserMessage);
-  const addBotMessage = useChatStore((s) => s.addBotMessage);
+  const history = useChatStore(s => s.history);
+  const conversationId = useChatStore(s => s.conversationId);
+  const addUserMessage = useChatStore(s => s.addUserMessage);
+  const addBotMessage = useChatStore(s => s.addBotMessage);
   const containerRef = useRef<HTMLDivElement>(null);
 
   async function send() {
@@ -23,7 +23,7 @@ export function Chat({ promptKey = "Student" }: { promptKey?: string }) {
 
     // push to the store
     addUserMessage(trimmed);
-    setMsg("");
+    setMsg('');
     setLoading(true);
 
     try {
@@ -41,7 +41,7 @@ export function Chat({ promptKey = "Student" }: { promptKey?: string }) {
 
   useEffect(() => {
     const c = containerRef.current;
-    if (c) c.scrollTo({ top: c.scrollHeight, behavior: "smooth" });
+    if (c) c.scrollTo({ top: c.scrollHeight, behavior: 'smooth' });
   }, [history, loading]);
 
   return (
@@ -54,15 +54,15 @@ export function Chat({ promptKey = "Student" }: { promptKey?: string }) {
           <div
             key={i}
             className={`flex ${
-              m.from === "user" ? "justify-end" : "justify-start"
+              m.from === 'user' ? 'justify-end' : 'justify-start'
             }`}
           >
             <div
               className={`
                 ${
-                  m.from === "bot"
-                    ? "motion-preset-fade"
-                    : "bg-secondary motion-preset-fade"
+                  m.from === 'bot'
+                    ? 'motion-preset-fade'
+                    : 'bg-secondary motion-preset-fade'
                 }
                 px-3 py-2 rounded-lg max-w-[100%]
               `}
@@ -84,8 +84,8 @@ export function Chat({ promptKey = "Student" }: { promptKey?: string }) {
         <input
           className="flex-1 focus:outline-none"
           value={msg}
-          onChange={(e) => setMsg(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && send()}
+          onChange={e => setMsg(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && send()}
           placeholder="Ask anything"
         />
         <Button className="rounded-full" onClick={send} disabled={loading}>

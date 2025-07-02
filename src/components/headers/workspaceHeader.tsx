@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { ThemeToggle } from "../theme/theme.toggler";
-import { DatabaseZap } from "lucide-react";
-import { Button } from "../ui/button";
-import { authService } from "@/lib/services/api/auth.api";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import Link from 'next/link';
+import { ThemeToggle } from '../theme/theme.toggler';
+import { DatabaseZap } from 'lucide-react';
+import { Button } from '../ui/button';
+import { authService } from '@/lib/services/api/auth.api';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 export function WorkspaceHeader() {
   const router = useRouter();
   const handleSignOut = async (): Promise<void> => {
     try {
       await authService.signOut();
-      toast("Message", { description: "You're logged out." });
+      toast('Message', { description: "You're logged out." });
       setTimeout(() => {
-        router.push("/");
+        router.push('/');
       }, 1500);
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : String(error);
-      toast("Error while logging out", {
+      toast('Error while logging out', {
         description: message,
       });
     }
@@ -34,7 +34,7 @@ export function WorkspaceHeader() {
       </div>
       <div className="flex space-x-2">
         <ThemeToggle />
-        <Button variant={"outline"} onClick={handleSignOut}>
+        <Button variant={'outline'} onClick={handleSignOut}>
           Sign Out
         </Button>
       </div>

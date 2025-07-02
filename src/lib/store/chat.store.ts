@@ -1,6 +1,6 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { HistoryItemDto } from "../types/history.type";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { HistoryItemDto } from '../types/history.type';
 
 interface ChatStore {
   conversationId: string | null;
@@ -15,26 +15,26 @@ interface ChatStore {
 
 export const useChatStore = create<ChatStore>()(
   persist(
-    (set) => ({
+    set => ({
       conversationId: null,
       history: [],
 
       setConversationId: (id: string) => set({ conversationId: id }),
 
       addUserMessage: (text: string) =>
-        set((state) => ({
-          history: [...state.history, { from: "user", text }],
+        set(state => ({
+          history: [...state.history, { from: 'user', text }],
         })),
 
       addBotMessage: (text: string) =>
-        set((state) => ({
-          history: [...state.history, { from: "bot", text }],
+        set(state => ({
+          history: [...state.history, { from: 'bot', text }],
         })),
 
       clearHistory: () => set({ history: [] }),
     }),
     {
-      name: "chat-storage",
-    }
-  )
+      name: 'chat-storage',
+    },
+  ),
 );

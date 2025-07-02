@@ -1,18 +1,18 @@
-import { ChatDto } from "@/lib/types/chat.type";
-import { ChatResponseDto } from "@/lib/types/chat.type";
-import { HistoryItemDto } from "@/lib/types/history.type";
+import { ChatDto } from '@/lib/types/chat.type';
+import { ChatResponseDto } from '@/lib/types/chat.type';
+import { HistoryItemDto } from '@/lib/types/history.type';
 type ApiResponse<T = { message: string }> = T;
 
 class ChatService {
   // Template for fetching endpoints
   private async fetchApi<T>(
     endpoint: string,
-    options: RequestInit
+    options: RequestInit,
   ): Promise<ApiResponse<T>> {
     try {
       const response = await fetch(`/api/aibot/${endpoint}`, {
         ...options,
-        headers: { "Content-Type": "application/json", ...options.headers },
+        headers: { 'Content-Type': 'application/json', ...options.headers },
       });
 
       const data = await response.json();
@@ -28,8 +28,8 @@ class ChatService {
   }
 
   async sendMessage(payload: ChatDto): Promise<ChatResponseDto> {
-    return this.fetchApi("chat", {
-      method: "POST",
+    return this.fetchApi('chat', {
+      method: 'POST',
       body: JSON.stringify(payload),
     });
   }
@@ -37,7 +37,7 @@ class ChatService {
   async getMessages(conversationId: string): Promise<HistoryItemDto[]> {
     const { history } = await this.fetchApi<{ history: HistoryItemDto[] }>(
       `history?conversationId=${conversationId}`,
-      { method: "GET" }
+      { method: 'GET' },
     );
     return history;
   }

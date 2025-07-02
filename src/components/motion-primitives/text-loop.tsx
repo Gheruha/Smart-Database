@@ -38,7 +38,7 @@ export function TextLoop({
 
     const intervalMs = interval * 1000;
     const timer = setInterval(() => {
-      setCurrentIndex((current) => {
+      setCurrentIndex(current => {
         const next = (current + 1) % items.length;
         onIndexChange?.(next);
         return next;
@@ -58,9 +58,9 @@ export function TextLoop({
       <AnimatePresence mode={mode} initial={false}>
         <motion.div
           key={currentIndex}
-          initial='initial'
-          animate='animate'
-          exit='exit'
+          initial="initial"
+          animate="animate"
+          exit="exit"
           transition={transition}
           variants={variants || motionVariants}
         >

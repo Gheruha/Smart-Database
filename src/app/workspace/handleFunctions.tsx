@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { sidebarService } from "@/lib/services/api/sidebar.api";
-import { SidebarGroup, SidebarItemDto } from "@/lib/types/sidebar.type";
-import { SidebarStructureDto } from "@/lib/types/supabase.type";
+import { useEffect, useState } from 'react';
+import { sidebarService } from '@/lib/services/api/sidebar.api';
+import { SidebarGroup, SidebarItemDto } from '@/lib/types/sidebar.type';
+import { SidebarStructureDto } from '@/lib/types/supabase.type';
 
 // Type-guard to confirm we really have an array of SidebarItemDto
 const isSidebarItemArray = (val: unknown): val is SidebarItemDto[] =>
   Array.isArray(val) &&
   val.every(
     (item): item is SidebarItemDto =>
-      typeof (item as SidebarItemDto).item_id === "string" &&
-      typeof (item as SidebarItemDto).item_name === "string" &&
-      typeof (item as SidebarItemDto).item_icon === "string" &&
-      typeof (item as SidebarItemDto).position === "number"
+      typeof (item as SidebarItemDto).item_id === 'string' &&
+      typeof (item as SidebarItemDto).item_name === 'string' &&
+      typeof (item as SidebarItemDto).item_icon === 'string' &&
+      typeof (item as SidebarItemDto).position === 'number',
   );
 
 export function useSidebarData() {
@@ -27,7 +27,7 @@ export function useSidebarData() {
           await sidebarService.getDefaultOptions();
 
         // 2) Map into your local SidebarGroup type, narrowing sidebar_items
-        const mapped: SidebarGroup[] = data.map((g) => ({
+        const mapped: SidebarGroup[] = data.map(g => ({
           group_id: g.group_id,
           group_name: g.group_name,
           icon: g.icon,
@@ -40,7 +40,7 @@ export function useSidebarData() {
 
         setGroups(mapped);
       } catch (e) {
-        console.error("Failed to load sidebar:", e);
+        console.error('Failed to load sidebar:', e);
       }
     })();
   }, []);

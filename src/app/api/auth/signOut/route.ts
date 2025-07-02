@@ -1,17 +1,17 @@
-import { NextResponse } from "next/server";
-import { signOutUser } from "@/lib/utils/auth/auth.utils";
+import { NextResponse } from 'next/server';
+import { signOutUser } from '@/lib/utils/auth/auth.utils';
 
 export async function POST() {
   try {
     await signOutUser();
 
     return NextResponse.json({
-      message: "User signed out successfuly.",
+      message: 'User signed out successfuly.',
     });
   } catch (error: unknown) {
-    console.error("Sign-out error:", error);
+    console.error('Sign-out error:', error);
     const errorMessage =
-      error instanceof Error ? error.message : "Internal server error";
+      error instanceof Error ? error.message : 'Internal server error';
     return NextResponse.json({ message: errorMessage }, { status: 500 });
   }
 }

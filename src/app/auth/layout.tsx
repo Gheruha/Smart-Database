@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   const router = useRouter();
 
   const handleGoBack = () => {
-    router.push("/");
+    router.push('/');
   };
 
   return (

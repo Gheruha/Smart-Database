@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useTheme } from "next-themes";
-import { useMemo } from "react";
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
+import { useMemo } from 'react';
 
 type ThemeImageProps = Omit<
   React.ComponentProps<typeof Image>,
-  "src" | "alt" | "width" | "height"
+  'src' | 'alt' | 'width' | 'height'
 > & {
   lightSrc: string;
   darkSrc: string;
@@ -26,11 +26,11 @@ export function ThemeImage({
   const { theme, systemTheme } = useTheme();
 
   const currentTheme = useMemo(
-    () => (theme === "system" ? systemTheme ?? "light" : theme),
-    [theme, systemTheme]
+    () => (theme === 'system' ? (systemTheme ?? 'light') : theme),
+    [theme, systemTheme],
   );
 
-  const imageSrc = currentTheme === "dark" ? darkSrc : lightSrc;
+  const imageSrc = currentTheme === 'dark' ? darkSrc : lightSrc;
 
   return (
     <Image src={imageSrc} alt={alt} width={width} height={height} {...props} />

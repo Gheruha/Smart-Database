@@ -1,4 +1,4 @@
 export interface HistoryItemDto {
-  from: "user" | "bot";
+  from: 'user' | 'bot';
   text: string;
 }

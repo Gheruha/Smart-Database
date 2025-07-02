@@ -1,13 +1,13 @@
-import { SidebarStructureDto } from "@/lib/types/supabase.type";
+import { SidebarStructureDto } from '@/lib/types/supabase.type';
 
 class SidebarService {
   private async fetchApi<T>(
     endpoint: string,
-    options: RequestInit
+    options: RequestInit,
   ): Promise<T> {
     const res = await fetch(`/api/sidebar/${endpoint}`, {
       ...options,
-      headers: { "Content-Type": "application/json", ...options.headers },
+      headers: { 'Content-Type': 'application/json', ...options.headers },
     });
 
     const payload = await res.json();
@@ -19,8 +19,8 @@ class SidebarService {
   }
 
   async getDefaultOptions(): Promise<SidebarStructureDto[]> {
-    return this.fetchApi<SidebarStructureDto[]>("getDefaultOptions", {
-      method: "GET",
+    return this.fetchApi<SidebarStructureDto[]>('getDefaultOptions', {
+      method: 'GET',
     });
   }
 }

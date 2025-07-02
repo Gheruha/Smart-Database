@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import {
   createMiddlewareClient,
   createRouteHandlerClient,
-} from "@supabase/auth-helpers-nextjs";
-import type { Database } from "@/lib/types/database.types";
+} from '@supabase/auth-helpers-nextjs';
+import type { Database } from '@/lib/types/database.types';
 
 // Environment variables validation
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -15,11 +15,11 @@ const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 if (!supabaseUrl || !supabaseAnonKey || !supabaseServiceRoleKey) {
   throw new Error(
     `Missing Supabase environment variables:
-		- NEXT_PUBLIC_SUPABASE_URL: ${supabaseUrl ?? "undefined"}
-		- NEXT_PUBLIC_SUPABASE_ANON_KEY: ${supabaseAnonKey ? "set" : "undefined"}
-		- SUPABASE_SERVICE_ROLE_KEY: ${supabaseServiceRoleKey ? "set" : "undefined"}
+		- NEXT_PUBLIC_SUPABASE_URL: ${supabaseUrl ?? 'undefined'}
+		- NEXT_PUBLIC_SUPABASE_ANON_KEY: ${supabaseAnonKey ? 'set' : 'undefined'}
+		- SUPABASE_SERVICE_ROLE_KEY: ${supabaseServiceRoleKey ? 'set' : 'undefined'}
 
-		Make sure they are correctly set in your environment variables.`
+		Make sure they are correctly set in your environment variables.`,
   );
 }
 
@@ -35,7 +35,7 @@ export const createSupabaseClientServiceRole = (): SupabaseClient<Database> => {
 // Create a Supabase client for middleware use.
 export const createSupabaseClientMiddleware = (
   req: NextRequest,
-  res: NextResponse
+  res: NextResponse,
 ): SupabaseClient<Database> => {
   return createMiddlewareClient<Database>({
     req,

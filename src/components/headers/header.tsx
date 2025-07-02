@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { ThemeToggle } from "../theme/theme.toggler";
-import { DatabaseZap } from "lucide-react";
-import { Button } from "../ui/button";
+import Link from 'next/link';
+import { ThemeToggle } from '../theme/theme.toggler';
+import { DatabaseZap } from 'lucide-react';
+import { Button } from '../ui/button';
 
 export function Header() {
   return (
@@ -15,12 +15,12 @@ export function Header() {
       </div>
       <div className="flex space-x-2">
         <ThemeToggle />
-        <Button variant={"outline"}>
-          <Link href={"/auth?mode=signIn"}>Sign In</Link>
-        </Button>
-        <Button>
-          <Link href={"/auth?mode=signUp"}>Sign Up</Link>
-        </Button>
+        <Link href={'/auth?mode=signIn'}>
+          <Button variant={'outline'}>Sign In</Button>
+        </Link>
+        <Link href={'/auth?mode=signUp'}>
+          <Button>Sign Up</Button>
+        </Link>
       </div>
     </header>
   );

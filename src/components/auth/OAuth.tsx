@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React from "react";
-import { ThemeImage } from "../theme/theme-image";
-import { Button } from "@/components/ui/button";
-import { signInWithGoogleHandler } from "@/app/auth/handleFunctions";
+import React from 'react';
+import { ThemeImage } from '../theme/theme-image';
+import { Button } from '@/components/ui/button';
+import { signInWithGoogleHandler } from '@/app/auth/handleFunctions';
 
 export const OAuth = () => {
   return (

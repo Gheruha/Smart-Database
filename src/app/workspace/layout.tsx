@@ -1,7 +1,7 @@
-"use client";
-import { AppSidebar } from "@/components/app-sidebar/app-sidebar";
-import { WorkspaceHeader } from "@/components/headers/workspaceHeader";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+'use client';
+import { AppSidebar } from '@/components/app-sidebar/app-sidebar';
+import { WorkspaceHeader } from '@/components/headers/workspaceHeader';
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 
 interface RootLayoutProps {
   children: React.ReactNode;
