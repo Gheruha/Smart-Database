@@ -3,12 +3,13 @@
 
 import React from 'react';
 import { LucideProps } from 'lucide-react';
-import { Plus, File, Folder, ChevronDown } from 'lucide-react';
+import { Plus, File, Folder, ChevronDown, Table } from 'lucide-react';
 
 const ICON_MAP: Record<string, React.ComponentType<LucideProps>> = {
   plus: Plus,
   file: File,
   folder: Folder,
+  table: Table,
   chevrondown: ChevronDown,
 };
 

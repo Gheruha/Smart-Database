@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { sidebarService } from '@/lib/services/api/sidebar.api';
 import { SidebarGroup, SidebarItemDto } from '@/lib/types/sidebar.type';
 import { SidebarStructureDto } from '@/lib/types/supabase.type';
+import { useSidebarStore } from '@/lib/store/sidebar.store';
 
 // Type-guard to confirm we really have an array of SidebarItemDto
 const isSidebarItemArray = (val: unknown): val is SidebarItemDto[] =>
@@ -17,16 +18,15 @@ const isSidebarItemArray = (val: unknown): val is SidebarItemDto[] =>
   );
 
 export function useSidebarData() {
-  const [groups, setGroups] = useState<SidebarGroup[]>([]);
+  const groups = useSidebarStore(s => s.groups);
+  const setGroups = useSidebarStore(s => s.setGroups);
 
   useEffect(() => {
     (async () => {
       try {
-        // 1) Service now returns SidebarStructureDto[]
         const data: SidebarStructureDto[] =
           await sidebarService.getDefaultOptions();
 
-        // 2) Map into your local SidebarGroup type, narrowing sidebar_items
         const mapped: SidebarGroup[] = data.map(g => ({
           group_id: g.group_id,
           group_name: g.group_name,
@@ -43,7 +43,7 @@ export function useSidebarData() {
         console.error('Failed to load sidebar:', e);
       }
     })();
-  }, []);
+  }, [setGroups]);
 
   return groups;
 }

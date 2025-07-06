@@ -155,6 +155,7 @@ function Sidebar({
   side = 'left',
   variant = 'sidebar',
   collapsible = 'offcanvas',
+  collapsed,
   className,
   children,
   ...props
@@ -162,13 +163,28 @@ function Sidebar({
   side?: 'left' | 'right';
   variant?: 'sidebar' | 'floating' | 'inset';
   collapsible?: 'offcanvas' | 'icon' | 'none';
+  collapsed?: boolean;
 }) {
-  const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
+  const {
+    isMobile,
+    state: contextState,
+    openMobile,
+    setOpenMobile,
+  } = useSidebar();
+
+  // if parent passed `collapsed`, use that; otherwise fall back
+  const effectiveState =
+    typeof collapsed === 'boolean'
+      ? collapsed
+        ? 'collapsed'
+        : 'expanded'
+      : contextState;
 
   if (collapsible === 'none') {
     return (
       <div
         data-slot="sidebar"
+        data-state={effectiveState}
         className={cn(
           'bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col',
           className,
@@ -208,8 +224,8 @@ function Sidebar({
   return (
     <div
       className="group peer text-sidebar-foreground hidden md:block"
-      data-state={state}
-      data-collapsible={state === 'collapsed' ? collapsible : ''}
+      data-state={effectiveState}
+      data-collapsible={effectiveState === 'collapsed' ? collapsible : ''}
       data-variant={variant}
       data-side={side}
       data-slot="sidebar"

@@ -1,6 +1,6 @@
-// src/components/app-sidebar/app-sidebar.tsx
 'use client';
 
+import * as React from 'react';
 import {
   Sidebar,
   SidebarContent,
@@ -15,14 +15,16 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import { useSidebarData } from '@/app/workspace/handleFunctions';
-import { IconResolver } from '../iconResolver/iconResolver';
+import { IconResolver } from '@/components/iconResolver/iconResolver';
+import { useSidebarStore } from '@/lib/store/sidebar.store';
 
 export function AppSidebar() {
   const groups = useSidebarData();
+  const isCollapsed = useSidebarStore(s => s.isCollapsed);
 
   return (
-    <Sidebar className="mt-12">
-      <SidebarHeader />
+    <Sidebar className="mt-12" collapsed={isCollapsed}>
+      <SidebarHeader className="flex justify-end"></SidebarHeader>
       <SidebarContent>
         {groups.map(group => (
           <Collapsible key={group.group_id} className="w-full">
@@ -49,6 +51,7 @@ export function AppSidebar() {
           </Collapsible>
         ))}
       </SidebarContent>
+
       <SidebarFooter />
     </Sidebar>
   );
