@@ -1,3 +1,6 @@
+export const runtime = 'edge';
+export const revalidate = 0;
+
 import { NextResponse } from 'next/server';
 import { getDefaultSidebarOptions } from '@/lib/utils/sidebar/sidebar.utils';
 
