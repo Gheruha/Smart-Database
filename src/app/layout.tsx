@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'School Manage',
+  title: 'Smart Database',
   description: 'Database management',
   icons: {
     icon: '/icons/favicon.ico',

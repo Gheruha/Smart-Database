@@ -19,7 +19,7 @@ class SidebarService {
   }
 
   async getDefaultOptions(): Promise<SidebarStructureDto[]> {
-    return this.fetchApi<SidebarStructureDto[]>('getDefaultOptions', {
+    return this.fetchApi<SidebarStructureDto[]>('data', {
       method: 'GET',
     });
   }
